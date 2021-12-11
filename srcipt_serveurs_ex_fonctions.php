@@ -13,7 +13,7 @@ function yaCombien($char, $str, $case = true) {
     $count = 0;
     //VALIDATION DES DONNEES UTILISATEUR
     //verifier que $char et $str sont des chaines de caractères, $case est un booleen, l'utilisateur n'entre qu'un caractère
-    if (!is_string($str) || !is_string($char) || !is_bool($case) || strlen($char) != 1) {
+    if (!is_string($str) || !is_string($char) || !is_bool($case) || strlen($char) !== 1) {
         return false;
     }
     //si $case est false on transforme tout en minuscule(ou en majuscule si on préfère)
@@ -21,14 +21,13 @@ function yaCombien($char, $str, $case = true) {
         $char = strtolower($char);
         $str =  strtolower($str);
     }
-
-    for ($i = 0; $i < $strLength; $i++){
-        if ($char == $str[$i]){
+    for ($i = 0; $i < $strLength; $i++) {
+        if ($char === $str[$i]){
             $count++;
         }
     }
     return $count;
-};
+}
 
 //TESTS UNITAIRES
 //Cas corrects
