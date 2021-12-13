@@ -144,7 +144,7 @@ foreach ($infosPays as $pays => $value){
 
 for ($p = 0; $p < $amCountry; $p++){
     echo "<p>".$countryNames[$p]."</p>";
-    showTab($infosPays[$pays]);
+    showTab($infosPays[$countryNames[$p]]);
 }
 
 
@@ -177,7 +177,7 @@ echo "<p>10.e. Affichez toutes les langues officielles de Belgique.</p>";
 $prefLan = "le ";
 $languString = "les langues officielles de Belgique sont : ";
 
-foreach ($infosPays['Belgique']['langues'] as $langue){
+foreach ($infosPays['Belgique']['langues'] as $langue) {
     $languString .= $prefLan;
     $languString .= $langue;
     $languString .= $format;
@@ -189,32 +189,34 @@ echo "<p>10.f. Affichez (en indiquant le pays) les langues officielles de tous l
 foreach ($infosPays as $pays => $value) {
     $stringPays = "Les langues officielles du pays ".$pays." sont : ";
     foreach ($infosPays[$pays]['langues'] as $langue) {
-        if (is_string($infosPays[$pays][$langue])){
-            $stringPays .= $langue;
-        }
-        else {
+        if (is_string($langue)){
             $stringPays .= $prefLan;
             $stringPays .= $langue;
             $stringPays .= $format;
         }
+
     }
+    $stringPays .= $prefLan;
+    $stringPays .= $infosPays[$pays]['langues'];
+    $stringPays .= $format;
     showP($stringPays);
 }
-/*
+
 echo "<p>10.g. Affichez la monnaie des deux derniers pays.</p>";
-
-$infoCountryRevAndIndexed = array_values(array_reverse($infosPays));
-$amountCountry = 2;
-
-for ($i = 0; $i < $amountCountry; $i++){
-    $languStringLast = "Les langues officielles du pays ".$infoCountryRevAndIndexed[$i]." sont : ";
-    foreach($infoCountryRevAndIndexed[$i]['langues'] as $langue) {
-        $languStringLast += $prefLan;
-        $languStringLast += $langue;
-        $languStringLast += $format;
-    }
-    showP($languStringLast);
+$revCountryNames = [];
+$revInfo = array_reverse($infosPays);
+foreach ($revInfo as $pays => $value) {
+    $revCountryNames[] = $pays;
 }
+$infoCountryRevAndIndexed = array_values($revInfo);
+$amountCountry = 2;
+//showTab($infoCountryRevAndIndexed);
+for ($i = 0; $i < $amountCountry; $i++) {
+    $moneyStringLast = "La monnaie officielle du pays " . $revCountryNames[$i] . " est : ";
+    $moneyStringLast .= $infoCountryRevAndIndexed[$i]['monnaie'];
+    showP($moneyStringLast);
+}
+
 
 //3. MODIFIER DES TABLEAUX
 
@@ -247,7 +249,7 @@ showTab($tabPrenoms);
 
 echo "<p>1.f. Supprimez les prénoms du troisième au cinquième prénom.</p>";
 
-array_splice($tabPrenoms, 0, 2, []);
+array_splice($tabPrenoms, 0, 2, $tabPrenoms);
 showTab($tabPrenoms);
 
 
@@ -270,13 +272,15 @@ showTab($tabPoids);
 
 
 echo "<h3>3. En utilisant le tableau infoPays.</h3>";
+/*
 echo "<p>3.a. Ajoutez l'anglais comme langue supplémentaire pour tous les pays.</p>";
-
+showTab($infosPays);
 foreach ($infosPays as $pays){
-    $pays['langues'] = 'anglais';
+    showTab($pays);
+    array_push($pays['langues'], 'anglais');
 }
 showTab($infosPays);
-
+*/
 echo "<p>3.b. Ajoutez comme information supplémentaire l'extension de domaine correspondante à chaque pays (be, fr, jp, ch).</p>";
 
 $domains = ['be', 'fr', 'jp', 'ch'];
@@ -284,5 +288,6 @@ $d = 0;
 
 foreach ($infosPays as $pays) {
     $pays['domaine'] = $domains[$d];
+    showTab($pays);
     $d++;
-}*/
+}
