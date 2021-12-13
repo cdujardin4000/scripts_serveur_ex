@@ -7,7 +7,7 @@ function showTab($tab) {
 
 
 function showP($txt) {
-    echo "<p>".$txt."</p>>";
+    echo "<p>".$txt."</p>";
 }
 
 
@@ -264,7 +264,7 @@ for($i = 0; $i < $ammountWeights; $i++) {
 showTab($tabPoids);
 
 echo "<p>2.b Augmentez tous les poids de 5kg avec une boucle foreach.</p>";
-
+showP("Ici c'est sensé rajouter encore 5 mais ne le fait pas????");
 foreach($tabPoids as $poid) {
     $poid += 5;
 }
