@@ -151,7 +151,7 @@ for ($p = 0; $p < $amCountry; $p++){
 echo "<p>10.c. Affichez la superficie du pays dont la capitale est Paris.</p>";
 
 foreach ($infosPays as $pays){
-    if ($pays['capitale'] == 'Paris'){
+    if ($pays['capitale'] === 'Paris'){
         showP("La superficie  est de ".$pays['superficie']);
     }
 }
@@ -163,7 +163,7 @@ $limit = $infosPays['Suisse']['superficie'];
 $paysString = "";
 
 foreach ($infosPays as $pays => $value){
-    if($infosPays[$pays]['superficie'] > $limit){
+    if($value['superficie'] > $limit){
         $paysString .= $pays;
         $paysString .= $format;
     }
@@ -188,7 +188,7 @@ echo "<p>10.f. Affichez (en indiquant le pays) les langues officielles de tous l
 
 foreach ($infosPays as $pays => $value) {
     $stringPays = "Les langues officielles du pays ".$pays." sont : ";
-    foreach ($infosPays[$pays]['langues'] as $langue) {
+    foreach ($value['langues'] as $langue) {
         if (is_string($langue)){
             $stringPays .= $prefLan;
             $stringPays .= $langue;
@@ -197,7 +197,7 @@ foreach ($infosPays as $pays => $value) {
 
     }
     $stringPays .= $prefLan;
-    $stringPays .= $infosPays[$pays]['langues'];
+    $stringPays .= $value['langues'];
     $stringPays .= $format;
     showP($stringPays);
 }
