@@ -12,7 +12,7 @@ function showP($txt) {
 
 
 //1.Declarer des tableaux
-
+echo "<h1>EXERCICES SUR LES TABLEAUX.</h1>";
 echo "<h2>DECLARER DES TABLEAUX.</h2>";
 
 echo "<h3>tabPoids.</h3>";
