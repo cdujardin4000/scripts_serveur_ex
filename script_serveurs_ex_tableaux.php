@@ -224,7 +224,9 @@ echo "<h2>MODIFIER DES TABLEAUX.</h2>";
 echo "<h3>1. En utilisant le tableau tabPrenoms.</h3>";
 echo "<p>1.a. Ajoutez à la fin les prénoms suivants: Mike, Tanaka, Ramón.</p>";
 
-$tabPrenoms = ['Mike', 'Tanaka', 'Ramon'];
+$tabPrenoms[] = 'Mike';
+$tabPrenoms[] = 'Tanaka';
+$tabPrenoms[] = 'Ramon';
 showTab($tabPrenoms);
 
 echo "<p>1.b. Ajoutez au début les prénoms suivants: César, Pénélope.</p>";
@@ -248,8 +250,13 @@ array_splice($tabPrenoms, 1, 0, 'Julie');
 showTab($tabPrenoms);
 
 echo "<p>1.f. Supprimez les prénoms du troisième au cinquième prénom.</p>";
+$start = 2;
+$end = 4;
 
-array_splice($tabPrenoms, 0, 2, $tabPrenoms);
+for ($i = $start; $i <= $end; $i++) {
+    unset($tabPrenoms[$i]);
+}
+
 showTab($tabPrenoms);
 
 
