@@ -201,7 +201,26 @@ foreach ($infosPays as $pays => $value) {
     $stringPays .= $format;
     showP($stringPays);
 }
+/*
 
+foreach ($infosPays as $pays => $value) {
+    $stringPays = "Les langues officielles du pays ".$pays." sont : ";
+    if (!is_array($pays['langues'])){
+        $stringPays .= $prefLan;
+        $stringPays .= $langue;
+        $stringPays .= $format;
+    }
+    else {
+        foreach ($value['langues'] as $langue) {
+            $stringPays .= $prefLan;
+            $stringPays .= $langue;
+            $stringPays .= $format;
+        }
+
+    }
+    showP($stringPays);
+}
+ */
 echo "<p>10.g. Affichez la monnaie des deux derniers pays.</p>";
 $revCountryNames = [];
 $revInfo = array_reverse($infosPays);
@@ -224,9 +243,7 @@ echo "<h2>MODIFIER DES TABLEAUX.</h2>";
 echo "<h3>1. En utilisant le tableau tabPrenoms.</h3>";
 echo "<p>1.a. Ajoutez à la fin les prénoms suivants: Mike, Tanaka, Ramón.</p>";
 
-$tabPrenoms[] = 'Mike';
-$tabPrenoms[] = 'Tanaka';
-$tabPrenoms[] = 'Ramon';
+array_push($tabPrenoms, 'Mike', 'Tanaka', 'Ramon');
 showTab($tabPrenoms);
 
 echo "<p>1.b. Ajoutez au début les prénoms suivants: César, Pénélope.</p>";
@@ -279,15 +296,26 @@ showTab($tabPoids);
 
 
 echo "<h3>3. En utilisant le tableau infoPays.</h3>";
-/*
+
 echo "<p>3.a. Ajoutez l'anglais comme langue supplémentaire pour tous les pays.</p>";
-showTab($infosPays);
+
 foreach ($infosPays as $pays){
+
+    if (is_array($pays['langues'])){
+        array_push($pays['langues'], 'anglais');
+    }
+    else {
+        $actualLanguages = $pays['langues'];
+        //var_dump($actualLanguages);
+        $pays['langues'] = [];
+        array_push($pays['langues'], $actualLanguages, 'anglais');
+
+    }
     showTab($pays);
-    array_push($pays['langues'], 'anglais');
 }
+//les 'anglais' ne restent pas pq?????????
 showTab($infosPays);
-*/
+
 echo "<p>3.b. Ajoutez comme information supplémentaire l'extension de domaine correspondante à chaque pays (be, fr, jp, ch).</p>";
 
 $domains = ['be', 'fr', 'jp', 'ch'];
